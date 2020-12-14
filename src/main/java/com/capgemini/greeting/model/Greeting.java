@@ -5,13 +5,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="GREETINGS")
+@Table(name="greet")
 public class Greeting {
 	@Id
 	public long greetingId;
 	public String greetingMsg;
 	public Greeting() {
-		
 	}
 	public Greeting(long incrementAndGet, String template) {
 		greetingId = incrementAndGet;

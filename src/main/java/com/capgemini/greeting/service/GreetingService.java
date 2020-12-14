@@ -1,5 +1,6 @@
 package com.capgemini.greeting.service;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,25 @@ public class GreetingService implements IGreetingInterface{
 	public Greeting getGreetingById(long id) {
 		return greetingRepository.findById(id).get();
 	}
+	@Override
+	public List<Greeting> getAll() {
+		return greetingRepository.findAll();
+	}
+	@Override
+	public List<Greeting> updateGreeting(long id, User user) {
+		String message = String.format(template, (user.toString().isEmpty())?"Hello World" : user.toString());
+		greetingRepository.save(new Greeting(id, message));
+		return greetingRepository.findAll();
+	}
+	@Override
+	public List<Greeting> deleteGreeting(long id) {
+		greetingRepository.deleteById(id);
+		return greetingRepository.findAll();
+	}
+	@Override
+	public List<Greeting> deleteAllGreeting() {
+		greetingRepository.deleteAll();
+		return greetingRepository.findAll();
+	}
+	
 }
